@@ -22,6 +22,7 @@ samples, guidance on mobile development, and a full API reference.
 - moster_chef_app
   - moster_chef_pagina_principal
     - lista_compra_pantalla (observa de lista_compra (Esto es lo que cambia, y lo que es observado))
+      - lista_compra_aniadir_producto  (La sustituye, por encima, por eso lo del navigator )
       - lista_compra_pantalla_vacia
       - lista_compra_pantalla_llena
     - lista_recetas_pantalla
@@ -29,6 +30,11 @@ samples, guidance on mobile development, and a full API reference.
 ## Apuntes 
 - La variable _páginas la he declado como static debido a que va a compartirse entre todas las instancias de la clase y no depende de ninguna.
 - Podemos cambiar el tema claro y oscuro, usando en el ThemeData: Brignetness.dark o Brightness.light. y fuera el dartTheme.Dark y el themMode: com Thememode.system.
+- IMPORTANTE: Los navigator para quitar y poner las pantallas (Material Page route y navigator)
+- Importante declarar el controlador del campo de texto en el init state, para poder ir recogiendo la información.
+- Todas las vistas tienen un método dispose que permite, eliminar recursos cuando dejan de estar vistas por el usuario
+- Basicamente lo que hace el Navigator.push es añadir a la pila con una animación
+- MaterialPageRoute: Es la que se encarga de crear la animación de la pantalla.
 
 ## Patrones de diseño
 - Patrón de interacción barra de navegación: Tiene como caracteristica que es un patrón de navegación persistente.
@@ -39,13 +45,15 @@ samples, guidance on mobile development, and a full API reference.
 ## Widgets
 - BottonNavigationBar: Es un widget que permite la navegación entre diferentes pantallas de la aplicación. (En la parte de abajo). IMPORTANTE: Hacerlos const debido a que no van a cambiar.
 - floatingActionButton: Es un widget que agrega un boton a la parte inferior, con el que podemos interactuar
+- ListView: Te permite hacer scroll
+- ListView.separated: Basicamente te hace sola la separación de la lista.
 
 ## Patrón de diseño estado productor consumidor
 - ChangeNotifier: Es el que observa el cambio. (Es la que tiene el estado mutable)
   - Tienen que tener los métodos notifyLsisteners() para notificar de que se ha producido un fallo.
 - ChangeNotifierProvider: Es quien da acceso al estado mutable a las vistas que lo necesitan.
 - Consumer: Es el observador, su tarea es escuchar los cambios que se producen, en un changeNotiffier
-- Provider: Permite acceder a los estados, pero sin escuchar  los cambios de estado.
+- Provider: Permite acceder a los estados, pero sin escuchar  los cambios de estado. (Hago un provider, para que cuando hago algo se reproduzca)
 
 IMPORTENTE: Los observadores no son widgets, si no que son clases del modelo de la apliación.
 
@@ -72,3 +80,12 @@ IMPORTANTE: Tengo que crear un changeNotifier, que tiene la logica, luego esto, 
     - context : Es el contexto
     - child: Las vistas que no cambian.
     - manager: En nuestro caso es el objeto del que escuchamos 
+
+- AppBar:
+  - actions: Permite añadir botones a la barra de navegación.
+
+- TextField:
+  - decoration: Para poner como que aparece en el campo de texto. (Mediante un listener)
+
+- Provider:
+  - El listen es para que no puedas tocar

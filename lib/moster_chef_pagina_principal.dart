@@ -50,3 +50,7 @@ class _MosterChefPaginaPrincipalState extends State<MosterChefPaginaPrincipal> {
     });
   }
 }
+
+
+// Hacer casi el enumerado de la sesión 1
+
