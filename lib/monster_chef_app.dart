@@ -8,11 +8,15 @@ class MonsterChefApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final listaCompra = ListaCompra();
+    listaCompra.init();
+
     return MaterialApp(
       title: "Monster Chef Application",
       //5
       home: MultiProvider(
-        providers: [ChangeNotifierProvider(create: (context) => ListaCompra())],
+        // 24
+        providers: [ChangeNotifierProvider(create: (context) => listaCompra)],
         child: MosterChefPaginaPrincipal(titulo: "Monster Chef"),
       ),
       theme: ThemeData(

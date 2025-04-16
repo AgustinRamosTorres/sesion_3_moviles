@@ -1,4 +1,12 @@
-enum Importancia { baja, media, alta }
+enum Importancia {
+  baja,
+  media,
+  alta;
+
+  static Importancia getImportanciaDesde({required String nombre}) {
+    return Importancia.values.byName(nombre);
+  }
+}
 
 class Producto {
   final String id;
@@ -28,6 +36,30 @@ class Producto {
       importancia: importancia ?? this.importancia,
       cantidad: cantidad ?? this.cantidad,
       completado: completado ?? this.completado,
+    );
+  }
+
+  String aJson() {
+    var json = '''
+        {
+          "id": "$id",
+          "nombre": "$nombre",
+          "importancia": "${importancia.name}",
+          "cantidad": $cantidad,
+          "completado": $completado
+        }
+    ''';
+
+    return json;
+  }
+
+  factory Producto.desdeJson(Map<String, dynamic> json) {
+    return Producto(
+      id: json['id'] as String,
+      nombre: json['nombre'] as String,
+      importancia: Importancia.getImportanciaDesde(nombre: json['importancia']),
+      cantidad: json['cantidad'] as int,
+      completado: json['completado'] as bool,
     );
   }
 }
